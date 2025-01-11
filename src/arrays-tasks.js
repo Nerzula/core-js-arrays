@@ -175,8 +175,6 @@ function insertItem(arr, item, index) {
   arr.splice(index, 0, item); 
   return arr;
 }
-
-console.log(insertItem([ 1, 3, 4, 5 ], 2, 1));
 /**
  * Returns the n first items of the specified array.
  *
