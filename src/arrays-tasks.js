@@ -577,8 +577,6 @@ function swapHeadAndTail(arr) {
   }
 }
 
-console.log(swapHeadAndTail([ 1 ]));
-
 module.exports = {
   getIntervalArray,
   sumArrays,
