@@ -524,13 +524,8 @@ function propagateItemsByPositionIndex(/* arr */) {
  *    shiftArray([10, 20, 30, 40, 50], -3) => [40, 50, 10, 20, 30]
  */
 function shiftArray(arr, n) {
-  const length = arr.length;
-  if (length === 0) return arr;
-
-  n = ((n % length) + length) % length;
-  return [...arr.slice(n), ...arr.slice(0, n)];
+  return arr.slice(-((n % arr.length) + arr.length) % arr.length).concat(arr.slice(0, -((n % arr.length) + arr.length) % arr.length));
 }
-
 
 /**
  * Sorts digit names.
