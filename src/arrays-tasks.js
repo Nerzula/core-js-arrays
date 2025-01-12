@@ -21,9 +21,9 @@
  *    getIntervalArray(3, 3) => [ 3 ]
  */
 function getIntervalArray(start, end) {
-  let arr = [];
+  const arr = [];
 
-  for (let index = start; index < end + 1; index++){
+  for (let index = start; index < end + 1; index + 1) {
     arr.push(index);
   }
 
@@ -44,8 +44,8 @@ function getIntervalArray(start, end) {
  *    sumArrays([-1, 0, 1], [1, 2, 3, 4]) => [0, 2, 4, 4]
  */
 function sumArrays(arr1, arr2) {
-  let result = [];
-  for (let i = 0; i < Math.max(arr1.length, arr2.length); i++) {
+  const result = [];
+  for (let i = 0; i < Math.max(arr1.length, arr2.length); i + 1) {
     result[i] = (arr1[i] || 0) + (arr2[i] || 0);
   }
   return result;
@@ -81,7 +81,7 @@ function findElement(arr, value) {
  *    findAllOccurrences([ true, 0, 1, 'true' ], true) => 1
  */
 function findAllOccurrences(arr, item) {
-  return arr.filter(element => element === item).length;
+  return arr.filter((element) => element === item).length;
 }
 /**
  * Removes falsy values from the specified array.
@@ -96,7 +96,7 @@ function findAllOccurrences(arr, item) {
  *    removeFalsyValues([ false, 0, NaN, '', undefined ]) => [ ]
  */
 function removeFalsyValues(arr) {
-  return [...arr].filter(item => item);
+  return [...arr].filter((item) => item);
 }
 /**
  * Returns an array containing the lengths of each string in a specified array of strings.
@@ -109,7 +109,7 @@ function removeFalsyValues(arr) {
  *    getStringsLength([ 'angular', 'react', 'ember' ]) => [ 7, 5, 5 ]
  */
 function getStringsLength(arr) {
-  return arr.map(item => item.length); 
+  return arr.map((item) => item.length);
 }
 /**
  * Returns the average of all items in the specified array of numbers.
@@ -126,8 +126,8 @@ function getStringsLength(arr) {
  *   getAverage([ 2, 3, 3 ])  => 2,67
  */
 function getAverage(arr) {
-  if(!arr.length) return 0;
-  const res = arr.reduce((acc, num,) => acc + num , 0) / arr.length
+  if (!arr.length) return 0;
+  const res = arr.reduce((acc, num) => acc + num, 0) / arr.length;
   return Number(res.toFixed(2));
 }
 /**
@@ -141,7 +141,7 @@ function getAverage(arr) {
  *    isSameLength(['cat', 'dog', 'elephant']) => false
  */
 function isSameLength(arr) {
-  if(!arr.length) return true;
+  if (!arr.length) return true;
   return arr.every((str) => str.length === arr[0].length);
 }
 
@@ -157,7 +157,7 @@ function isSameLength(arr) {
  *    isValueEqualsIndex([10, 20, 30, 40, 50]) => false
  */
 function isValueEqualsIndex(arr) {
-  return arr.some((value, index) => value === index); 
+  return arr.some((value, index) => value === index);
 }
 
 /**
@@ -172,7 +172,7 @@ function isValueEqualsIndex(arr) {
  *    insertItem([ 1, 'b', 'c'], 'x', 0) => [ 'x', 1, 'b', 'c' ]
  */
 function insertItem(arr, item, index) {
-  arr.splice(index, 0, item); 
+  arr.splice(index, 0, item);
   return arr;
 }
 /**
@@ -248,7 +248,6 @@ function distinct(arr) {
   return [...new Set(arr)];
 }
 
-
 /**
  * Creates an n-dimensional array and fills it with zeros.
  *
@@ -267,7 +266,9 @@ function createNDimensionalArray(n, size) {
     return Array(size).fill(0);
   }
 
-  return Array(size).fill(null).map(() => createNDimensionalArray(n - 1, size));
+  return Array(size)
+    .fill(null)
+    .map(() => createNDimensionalArray(n - 1, size));
 }
 /**
  * Flattens a nested array into a single-level array.
@@ -315,7 +316,10 @@ function selectMany(arr, childrenSelector) {
  *   calculateBalance([]) => 0
  */
 function calculateBalance(arr) {
-  return arr.reduce((balance, [income, expense]) => balance + (income - expense), 0)
+  return arr.reduce(
+    (balance, [income, expense]) => balance + (income - expense),
+    0
+  );
 }
 
 /**
@@ -332,7 +336,7 @@ function calculateBalance(arr) {
  */
 function createChunks(arr, chunkSize) {
   return arr.reduce((acc, num, index) => {
-    if(index % chunkSize === 0) {
+    if (index % chunkSize === 0) {
       acc.push([]);
     }
     acc[acc.length - 1].push(num);
@@ -354,7 +358,7 @@ function createChunks(arr, chunkSize) {
  */
 function generateOdds(len) {
   const arr = [];
-  for (let index = 0; index < len; index++) {
+  for (let index = 0; index < len; index + 1) {
     arr.push(2 * index + 1);
   }
   return arr;
@@ -388,8 +392,8 @@ function getElementByIndices(arr, indices) {
  *  getFalsyValuesCount([ -1, 'false', null, 0 ]) => 2
  *  getFalsyValuesCount([ null, undefined, NaN, false, 0, '' ]) => 6
  */
-function getFalsyValuesCount(/* arr */) {
-  throw new Error('Not implemented');
+function getFalsyValuesCount(arr) {
+  return arr.filter((item) => !item).length;
 }
 
 /**
@@ -411,12 +415,16 @@ function getFalsyValuesCount(/* arr */) {
  *                              [0,0,0,0,1]]
  */
 function getIdentityMatrix(n) {
-  const matrix = Array(n).fill(null).map(() => Array(n).fill(0));
-  
+  const matrix = Array(n)
+    .fill(null)
+    .map(() => Array(n).fill(0));
+
   matrix.forEach((row, i) => {
-    row[i] = 1;
+    const newRow = [...row];
+    newRow[i] = 1;
+    matrix[i] = newRow;
   });
-  
+
   return matrix;
 }
 
@@ -450,7 +458,9 @@ function getIndicesOfOddNumbers(numbers) {
  *    getHexRGBValues([]) => []
  */
 function getHexRGBValues(arr) {
-  return arr.map((num) => `#${(num & 0xFFFFFF).toString(16).padStart(6, '0').toUpperCase()}`);
+  return arr.map(
+    (num) => `#${num.toString(16).padStart(6, '0').toUpperCase()}`
+  );
 }
 
 /**
@@ -506,9 +516,9 @@ function findLongestIncreasingSubsequence(nums) {
   let maxLength = 1;
   let currentLength = 1;
 
-  for (let i = 1; i < nums.length; i++) {
+  for (let i = 1; i < nums.length; i + 1) {
     if (nums[i] > nums[i - 1]) {
-      currentLength++;
+      currentLength = +1;
     } else {
       maxLength = Math.max(maxLength, currentLength);
       currentLength = 1;
@@ -532,7 +542,7 @@ function findLongestIncreasingSubsequence(nums) {
  *  propagateItemsByPositionIndex([ 1,2,3,4,5 ]) => [ 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5 ]
  */
 function propagateItemsByPositionIndex(arr) {
-  if(!arr.length) return arr; 
+  if (!arr.length) return arr;
   return arr.flatMap((item, index) => Array(index + 1).fill(item));
 }
 
@@ -550,7 +560,9 @@ function propagateItemsByPositionIndex(arr) {
  *    shiftArray([10, 20, 30, 40, 50], -3) => [40, 50, 10, 20, 30]
  */
 function shiftArray(arr, n) {
-  return arr.slice(-((n % arr.length) + arr.length) % arr.length).concat(arr.slice(0, -((n % arr.length) + arr.length) % arr.length));
+  return arr
+    .slice(-((n % arr.length) + arr.length) % arr.length)
+    .concat(arr.slice(0, -((n % arr.length) + arr.length) % arr.length));
 }
 
 /**
@@ -567,10 +579,19 @@ function shiftArray(arr, n) {
  *   sortDigitNamesByNumericOrder([ 'one','one','one','zero' ]) => [ 'zero','one','one','one' ]
  */
 function sortDigitNamesByNumericOrder(arr) {
-  if(!arr.length) return arr;
+  if (!arr.length) return arr;
 
   const numbers = [
-    'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'
+    'zero',
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+    'nine',
   ];
 
   return arr.sort((a, b) => numbers.indexOf(a) - numbers.indexOf(b));
@@ -596,17 +617,16 @@ function sortDigitNamesByNumericOrder(arr) {
  *
  */
 function swapHeadAndTail(arr) {
-  const length = arr.length;
+  const { length } = arr;
 
   if (length <= 1) return arr;
-  
+
   const center = Math.floor(length / 2);
 
   if (length % 2 === 0) {
     return [...arr.slice(center), ...arr.slice(0, center)];
-  } else {
-    return [...arr.slice(center + 1), arr[center], ...arr.slice(0, center)];
   }
+  return [...arr.slice(center + 1), arr[center], ...arr.slice(0, center)];
 }
 
 module.exports = {
