@@ -23,7 +23,7 @@
 function getIntervalArray(start, end) {
   const arr = [];
 
-  for (let index = start; index < end + 1; index + 1) {
+  for (let index = start; index < end + 1; index += 1) {
     arr.push(index);
   }
 
@@ -45,7 +45,7 @@ function getIntervalArray(start, end) {
  */
 function sumArrays(arr1, arr2) {
   const result = [];
-  for (let i = 0; i < Math.max(arr1.length, arr2.length); i + 1) {
+  for (let i = 0; i < Math.max(arr1.length, arr2.length); i += 1) {
     result[i] = (arr1[i] || 0) + (arr2[i] || 0);
   }
   return result;
@@ -201,7 +201,7 @@ function getHead(arr, n) {
  *    getTail([ 'a', 'b', 'c', 'd'], 0) => []
  */
 function getTail(arr, n) {
-  return arr.slice(-n);
+  return arr.slice(Math.max(arr.length - n, 0));
 }
 /**
  * Returns the doubled array - elements of the specified array
@@ -358,7 +358,7 @@ function createChunks(arr, chunkSize) {
  */
 function generateOdds(len) {
   const arr = [];
-  for (let index = 0; index < len; index + 1) {
+  for (let index = 0; index < len; index += 1) {
     arr.push(2 * index + 1);
   }
   return arr;
@@ -513,19 +513,20 @@ function findCommonElements(arr1, arr2) {
  */
 function findLongestIncreasingSubsequence(nums) {
   if (!nums.length) return 0;
+
   let maxLength = 1;
   let currentLength = 1;
 
-  for (let i = 1; i < nums.length; i + 1) {
+  for (let i = 1; i < nums.length; i += 1) {
     if (nums[i] > nums[i - 1]) {
-      currentLength = +1;
+      currentLength += 1; // увеличиваем текущую длину
     } else {
-      maxLength = Math.max(maxLength, currentLength);
-      currentLength = 1;
+      maxLength = Math.max(maxLength, currentLength); // обновляем максимальную длину
+      currentLength = 1; // сбрасываем текущую длину
     }
   }
 
-  return Math.max(maxLength, currentLength);
+  return Math.max(maxLength, currentLength); // проверяем для последней последовательности
 }
 /**
  * Propagates every item in sequence its position times
